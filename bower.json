@@ -1,0 +1,24 @@
+{
+  "name": "rise-bower",
+  "homepage": "https://github.com/ruediste/rise-bower",
+  "authors": [
+    "Ruedi Steinmann"
+  ],
+  "description": "Web resources for the RISE framework",
+  "main": ["rise-core.js", "rise-core.css" ],
+  "keywords": [
+    "rise"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+   "bootstrap": "^3.3.7",
+   "react": "^15.3.2"
+ }
+}
