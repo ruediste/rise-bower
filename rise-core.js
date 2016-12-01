@@ -11,7 +11,7 @@ var rise = (function() {
 	var triggerViewReload = function(element) {
 		$(element).trigger("rise_viewReload");
 	}
-	
+
 	var pushUrls = function (jsonString){
 	  if (!jsonString)
 	    return;
@@ -22,7 +22,7 @@ var rise = (function() {
 	  	  history.pushState({},"",url);
 	  });
 	};
-	
+
 	/**
 	 * Enters an endless loop polling for an application restart
 	 */
@@ -50,7 +50,7 @@ var rise = (function() {
 			});
 		}
 	};
-	
+
 	/**
 	 * Enters an endless loop sending the heart beat to the server
 	 */
@@ -82,11 +82,6 @@ var rise = (function() {
 		if (extractFunc !== undefined) {
 			extractFunc.call($element, data);
 		}
-		
-		/*var key=$element.data("riseSendValue");
-		if (key){
-		  data.push({name:key, value:$element.attr("value")});
-		}*/
 
 		$element.children().each(function(idx, e) {
 			extractData(data, $(e));
@@ -97,7 +92,7 @@ var rise = (function() {
 		var $receiver = $(receiver);
 
 		// extract data
-		var data = $receiver.serializeArray();
+		var data = $receiver.find('*').serializeArray();
 		extractData(data, $receiver);
 
 		// perform request
@@ -137,7 +132,7 @@ var rise = (function() {
 			event.stopPropagation();
 			reload(this);
 		});
-		
+
 		// swallow submit events
 		$(document).on("submit", ".rise_reload", function(event) {
 			event.preventDefault();
@@ -147,7 +142,7 @@ var rise = (function() {
 		// register generic event handlers
 		[ "focusin", "focusout", "click" ].forEach(function(event) {
 			$(document).on(event, "*[data-rise-on-" + event + "]",
-					event, 
+					event,
 			function(evt) {
 				setExtractData(this, function(data) {
 					var $this=$(this);
@@ -170,7 +165,7 @@ var rise = (function() {
 				return false;
 			});
 		});
-		
+
 		// push initially pushed URLs
 		pushUrls($("body").data("rise-pushed-urls"));
 
@@ -183,14 +178,14 @@ var rise = (function() {
 
 	return {
 		onReload : onReload,
-		
+
 		// setExtractData(element, function($element, data))
 		// data: [{name:"...", value:"..."},...]
 		setExtractData : setExtractData,
 		triggerViewReload : triggerViewReload,
 		// fired to indicate that an element has been toggled. The argument is the component id of the toggled component
 		toggled : toggled,
-		
+
 	    debounce: function(fn, timeout){
 		  var timeoutId = -1;
 		  return function(){
@@ -224,7 +219,7 @@ rise.onReload.add(function($receiver){
 
 // ConClickToggle
 $(function(){
-  $(document).on("click", "*[data-rise-conclicktoggle-target]", 
+  $(document).on("click", "*[data-rise-conclicktoggle-target]",
 			function(evt) {
 			    rise.toggled.fire($(this).data("rise-conclicktoggle-target"));
 				return false;
@@ -240,7 +235,7 @@ $(function(){
 				return false;
 			});
   $(document).on("click", ".rise-cOptionalInputBase._unchecked > ._check > input", function(evt) {
-                $(this).parent().parent().toggle();	
+                $(this).parent().parent().toggle();
 			    $(this).parent().parent().prev().toggle();
 			    $(this).parent().parent().prev().prev().click();
 				return false;
