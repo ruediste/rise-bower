@@ -5,7 +5,10 @@
     "Ruedi Steinmann"
   ],
   "description": "Web resources for the RISE framework",
-  "main": ["rise-core.js", "rise-core.css" ],
+  "main": [
+    "rise-core.js",
+    "rise-core.css"
+  ],
   "keywords": [
     "rise"
   ],
@@ -13,12 +16,11 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
-   "bootstrap": "^3.3.7",
-   "react": "^15.3.2"
- }
+    "bootstrap": "^3.3.7",
+    "react": "^15.3.2",
+    "dropzone": "^4.3.0"
+  }
 }
