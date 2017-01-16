@@ -21,6 +21,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.3.2",
-    "dropzone": "^4.3.0"
+    "dropzone": "^4.3.0",
+    "chosen": "^1.6.2"
   }
 }
