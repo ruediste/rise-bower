@@ -139,31 +139,46 @@ var rise = (function() {
 			event.stopPropagation();
 		});
 
+		var setEventData=function(target, event){
+			var $this=$(target);
+			setExtractData(target, function(data) {
+				var kvp=$this.data("rise-on-"+event);
+				var idx=kvp.indexOf("=");
+				if (idx==-1){
+					data.push({
+						name : kvp,
+						value : "triggered"
+					});
+				}
+				else {
+					data.push({
+						name : kvp.substring(0,idx),
+						value : kvp.substring(idx+1)
+					});
+				}
+			});
+		};
+		
 		// register generic event handlers
 		[ "focusin", "focusout", "click" ].forEach(function(event) {
 			$(document).on(event, "*[data-rise-on-" + event + "]",
 					event,
 			function(evt) {
-				setExtractData(this, function(data) {
-					var $this=$(this);
-					var kvp=$this.data("rise-on-"+event);
-					var idx=kvp.indexOf("=");
-					if (idx==-1){
-						data.push({
-							name : kvp,
-							value : "triggered"
-						});
-					}
-					else {
-						data.push({
-							name : kvp.substring(0,idx),
-							value : kvp.substring(idx+1)
-						});
-					}
-				});
+				setEventData(this, event);
 				triggerViewReload(this);
 				return false;
 			});
+		});
+		
+		$(document).on("keypress", "*[data-rise-on-enter-key]",
+		function(evt) {
+			if (evt.keyCode==13){
+				setEventData(this, "enter-key");
+				triggerViewReload(this);
+				evt.preventDefault();
+				return false;
+			}
+			return true;
 		});
 
 		// push initially pushed URLs
