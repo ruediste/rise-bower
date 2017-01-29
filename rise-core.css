@@ -55,3 +55,9 @@
 .rise-cdisplay-none {
   display: none;
 }
+
+pre.form-control[disabled] {
+	height: auto;
+    cursor: auto;
+    min-height: 34px;
+}
